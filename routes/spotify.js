@@ -9,33 +9,38 @@ module.exports = function (name) {
     spotify.clientCredentialsGrant()
         .then(
             function (data) {
-                // console.log('The access token expires in ' + data.body['expires_in']);
-                // console.log('The access token is ' + data.body['access_token']);
 
                 // Save the access token so that it's used in future calls
                 spotify.setAccessToken(data.body['access_token']);
 
+                //Checking the song
                 spotify.searchTracks(`track:${name}`)
                     .then(function (data) {
 
                         const music = data.body.tracks.items;
 
-                        music.forEach(e => {
+                        //No result
+                        if (music.length === 0) {
+                            console.log("No results. Please make sure that the title of song is correct.")
+                        }
+                        else { //If found, display the results
+                            music.forEach(e => {
 
-                            if (e.name.toUpperCase() === name.toUpperCase()) {
-                                console.log("***********************************************************");
-                                console.log(`Artist: ${e.album.artists[0].name}`);
-                                console.log(`Song: ${e.name}`);
-                                console.log(`Album Name: ${e.album.name}`);
-                                if (e.preview_url === null) {
-                                    console.log(`Preview URL: Not Available`);
+                                if (e.name.toUpperCase() === name.toUpperCase()) {
+                                    console.log("***********************************************************");
+                                    console.log(`Artist: ${e.album.artists[0].name}`);
+                                    console.log(`Song: ${e.name}`);
+                                    console.log(`Album Name: ${e.album.name}`);
+                                    if (e.preview_url === null) {
+                                        console.log(`Preview URL: Not Available`);
+                                    }
+                                    else {
+                                        console.log(`Preview URL: ${e.preview_url}`);
+                                    }
                                 }
-                                else {
-                                    console.log(`Preview URL: ${e.preview_url}`);
-                                }
-                            }
-                        });
-                        console.log("***********************************************************");
+                            });
+                            console.log("***********************************************************");
+                        }
                     },
                         function (err) {
                             console.error(err);

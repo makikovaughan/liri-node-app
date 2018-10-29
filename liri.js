@@ -1,5 +1,11 @@
 require('dotenv').config();
 
+//Get input data from the command line
+let command = process.argv[2];
+let name = process.argv.slice(3).join(" ");
+
+name = name.toUpperCase();
+
 const doCommand = function (command, name) {
     //Music is searched by Spotify
     if (command === "spotify-this-song") {
@@ -32,25 +38,29 @@ const doCommand = function (command, name) {
         require('./routes/movie.js')(name);
 
     }
+    else {
+        console.log("Please check your command");
+    }
 }
 
 
-//Get input data from the command line
-let command = process.argv[2].trim().toLowerCase();
-let name = process.argv.slice(3).join(" ");
-
-if (command === "do-what-it-says") {
-
-    require('./routes/fileCommand.js')(function (command, name) {
-
-        doCommand(command, name);
-
-    });
-
+if (!command) {
+    console.log("Please type the command");
 }
 else {
+    command = command.trim().toLowerCase();
 
-    doCommand(command, name);
+    if (command === "do-what-it-says") {
+
+        require('./routes/fileCommand.js')(function (command, name) {
+
+            doCommand(command, name);
+
+        });
+
+    }
+    else {
+        doCommand(command, name);
+    }
 }
-
 

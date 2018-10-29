@@ -2,6 +2,8 @@
 const fs = require('fs');
 
 module.exports = function (cb) {
+
+    //Read the file
     fs.readFile('./random.txt', 'utf8', function (err, data) {
 
         if (err) {
@@ -14,6 +16,7 @@ module.exports = function (cb) {
         command = output[0];
         name = output[1];
 
+        //Calling back the input infomrmation from the file
         cb(command, name);
 
     });
