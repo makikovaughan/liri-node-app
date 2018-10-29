@@ -24,6 +24,10 @@ module.exports = function (name) {
                             console.log("No results. Please make sure that the title of song is correct.")
                         }
                         else { //If found, display the results
+
+                            //Check if the exact matched song was found or not
+                            let flag = false;
+
                             music.forEach(e => {
 
                                 if (e.name.toUpperCase() === name.toUpperCase()) {
@@ -37,8 +41,13 @@ module.exports = function (name) {
                                     else {
                                         console.log(`Preview URL: ${e.preview_url}`);
                                     }
+                                    flag=true;
                                 }
                             });
+
+                            if (!flag){ //If the flag is false, no exact matched songs were found.
+                                console.log("No exact matched song found. Please check the title of song again")
+                            }
                             console.log("***********************************************************");
                         }
                     },
