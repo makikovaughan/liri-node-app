@@ -27,8 +27,8 @@ LIRI is using a command line node to take parameters and returns a requested dat
 
 ### For getting the concert information.
 
-On a command line, type node liri.js movie-this movie title and hit enter.
-![movie](./assets/images/movieThis.png)
+On a command line, type node liri.js concert-this artist name and hit enter.
+![concert](./assets/images/concert.png)
 
 ### For spotify information
 
