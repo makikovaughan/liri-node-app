@@ -13,8 +13,8 @@ module.exports = function (cb) {
         // Break the string down by comma separation and store the contents into the output array.
         const output = data.split(',');
 
-        command = output[0];
-        name = output[1];
+        const command = output[0];
+        const name = output[1];
 
         //Calling back the input infomrmation from the file
         cb(command, name);
